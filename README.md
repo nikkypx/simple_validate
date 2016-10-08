@@ -63,7 +63,7 @@ end
 ### Format
 
 ```ruby
-  validates_format_of :attribute, with: /.*/
+  validates_format_of :attribute, with: /[A-Z]+/
 ```
 
 ### Length
