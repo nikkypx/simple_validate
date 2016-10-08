@@ -50,10 +50,8 @@ end
 
 ### Presence
 
-* It is possible to pass a different message to any validation.
-
 ```ruby
-  validates_presence_of :attribute, message: 'attribute is required!'
+  validates_presence_of :attribute
 ```
 
 ### Numericality
@@ -78,9 +76,19 @@ end
   validates_length_of :attribute, in: 6..9
 ```
 
+### Custom error messages
+
+* It is possible to pass a custom error message to any validation.
+
+```ruby
+  validates_presence_of :attribute, message: 'attribute is required!'
+```
+
+
 ## Development
 
 `$ rake` to run the specs
+
 
 ## Contributing
 
