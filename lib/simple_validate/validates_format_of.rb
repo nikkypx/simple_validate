@@ -4,7 +4,7 @@ module SimpleValidate
 
     def initialize(attribute, options)
       self.regex = options[:with]
-      super(attribute, options[:message] || "is incorrect format")
+      super(attribute, options[:message] || "is incorrect format", options[:if] || Proc.new { true })
     end
 
     def valid?(instance)
