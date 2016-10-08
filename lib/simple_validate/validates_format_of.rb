@@ -8,6 +8,7 @@ module SimpleValidate
     end
 
     def valid?(instance)
+      raise ArgumentError if regex.nil? || !regex.is_a?(Regexp)
       !!(instance.send(attribute) =~ regex)
     end
   end
