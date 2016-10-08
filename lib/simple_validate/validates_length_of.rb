@@ -1,13 +1,12 @@
 module SimpleValidate
-  class ValidatesLengthOf
+  class ValidatesLengthOf < ValidatesBase
     attr_reader :attribute
     class InvalidLengthOption < ArgumentError; end
 
     VALID_LENGTH_OPTIONS = %i(maximum minimum in is)
 
     def initialize(attribute, options)
-      @message          = options.delete(:message)
-      @attribute        = attribute
+      super(attribute, options.delete(:message), options.delete(:if) || Proc.new { true })
       @options          = options
       check_options(@options)
       @length_validator = @options.select { |k, _| VALID_LENGTH_OPTIONS.include?(k) }
