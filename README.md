@@ -34,7 +34,9 @@ class Person
   validates_presence_of :name, :age
   validates_numericality_of :age
 end
+```
 
+```ruby
 => p = Person.new
 => #<Person:0x007f9431536408>
 => p.valid?
@@ -51,7 +53,7 @@ end
 * It is possible to pass a different message to any validation.
 
 ```ruby
-  validates_presence_of :attribute, message: 'NOT HERE'
+  validates_presence_of :attribute, message: 'attribute is required!'
 ```
 
 ### Numericality
