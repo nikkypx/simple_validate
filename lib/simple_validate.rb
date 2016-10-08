@@ -39,7 +39,7 @@ module SimpleValidate
                         presence|
                         numericality|
                         length)_of)
-      /x || super
+                     /x || super
     end
 
     def add_validations(args, klass)

@@ -2,7 +2,7 @@ require 'spec_helper'
 
 RSpec.describe SimpleValidate do
   describe 'invalid format' do
-    before(:each) do
+    before do
       @klass = Class.new
       @klass.class_eval do
         include SimpleValidate

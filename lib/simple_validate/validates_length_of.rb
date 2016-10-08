@@ -7,7 +7,7 @@ module SimpleValidate
 
     def initialize(attribute, options)
       super(attribute, options.delete(:message), options.delete(:if) || Proc.new { true })
-      @options          = options
+      @options = options
       check_options(@options)
       @length_validator = @options.select { |k, _| VALID_LENGTH_OPTIONS.include?(k) }
     end
