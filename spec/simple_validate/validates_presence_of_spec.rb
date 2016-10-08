@@ -37,5 +37,17 @@ RSpec.describe SimpleValidate do
       instance.valid?
       expect(instance.errors.on(:name)).to eq(['NOT HERE'])
     end
+
+    it 'will check condition' do
+      @klass = Class.new
+      @klass.class_eval do
+        include SimpleValidate
+        attr_accessor :name
+        validates_presence_of :name, if: Proc.new { false }
+      end
+
+      instance = @klass.new
+      expect(instance.valid?).to be(true)
+    end
   end
 end

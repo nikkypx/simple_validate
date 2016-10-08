@@ -37,5 +37,17 @@ RSpec.describe SimpleValidate do
       instance.valid?
       expect(instance.errors.on(:age)).to eq(['NOT HERE'])
     end
+
+    it 'will check condition' do
+      @klass = Class.new
+      @klass.class_eval do
+        include SimpleValidate
+        attr_accessor :age
+        validates_numericality_of :age, if: Proc.new { false }
+      end
+
+      instance = @klass.new
+      expect(instance.valid?).to be(true)
+    end
   end
 end
