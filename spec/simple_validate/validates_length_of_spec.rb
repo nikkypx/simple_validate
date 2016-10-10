@@ -8,9 +8,11 @@ RSpec.describe SimpleValidate do
       @klass.class_eval do
         include SimpleValidate
         attr_accessor :name
+        validates_length_of :name, foo: 6
       end
+      instance = @klass.new
 
-      expect { @klass.class_eval { validates_length_of :name, min: 6 }}.to raise_error(SimpleValidate::ValidatesLengthOf::InvalidLengthOption)
+      expect { instance.valid? }.to raise_error(SimpleValidate::ValidatesLengthOf::InvalidLengthOption)
     end
   end
 
