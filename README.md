@@ -84,6 +84,14 @@ end
   validates_presence_of :attribute, message: 'attribute is required!'
 ```
 
+### Conditional validation
+
+* It is possible to pass an `if` option with a proc for a conditional validation
+
+```ruby
+  validates_presence_of :attribute, if: Proc.new { true }
+```
+
 
 ## Development
 
