@@ -1,10 +1,13 @@
-require 'simple_validate/version'
-require 'simple_validate/validates_base'
-require 'simple_validate/validates_presence_of'
-require 'simple_validate/validates_format_of'
-require 'simple_validate/validates_numericality_of'
-require 'simple_validate/validates_length_of'
+%w(base
+   presence_of
+   format_of
+   numericality_of
+   length_of
+   inclusion_of).each do |validation|
+    require "simple_validate/validates_#{validation}"
+   end
 require 'simple_validate/errors'
+require 'simple_validate/version'
 require 'active_support/all'
 
 module SimpleValidate
