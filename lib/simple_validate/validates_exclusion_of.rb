@@ -1,5 +1,3 @@
-require 'set'
-
 module SimpleValidate
   class ValidatesExclusionOf < ValidatesSetBase
 
