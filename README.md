@@ -76,7 +76,16 @@ end
   validates_length_of :attribute, in: 6..9
 ```
 
-### Custom error messages
+### Inclusion and Exclusion
+
+```ruby
+  validates_inclusion_of :domain, in: [:net, :com]
+  validates_exclusion_of :name, in: [:Bojack, :Horseman]
+```
+
+### Options
+
+#### Custom error messages
 
 * It is possible to pass a custom error message to any validation.
 
@@ -84,7 +93,7 @@ end
   validates_presence_of :attribute, message: 'attribute is required!'
 ```
 
-### Conditional validation
+#### Conditional validation
 
 * It is possible to pass an `if` option with a proc for a conditional validation
 
