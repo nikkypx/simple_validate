@@ -33,7 +33,7 @@ RSpec.describe SimpleValidate do
     it 'it will contain errors' do
       instance = @klass.new
       instance.valid?
-      expect(instance.errors.on(:domain)).to eq(['is not included in set'])
+      expect(instance.errors.on(:domain)).to eq(['breaks inclusion/exclusion rules'])
     end
   end
 

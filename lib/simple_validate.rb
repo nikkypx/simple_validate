@@ -3,6 +3,7 @@
    format_of
    numericality_of
    length_of
+   set_base
    inclusion_of
    exclusion_of).each do |validation|
     require "simple_validate/validates_#{validation}"

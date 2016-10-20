@@ -36,7 +36,7 @@ RSpec.describe SimpleValidate do
       instance = @klass.new
       instance.name = 'Mary'
       instance.valid?
-      expect(instance.errors.on(:name)).to eq(['is not allowed'])
+      expect(instance.errors.on(:name)).to eq(['breaks inclusion/exclusion rules'])
     end
   end
 
