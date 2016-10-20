@@ -41,6 +41,7 @@ module SimpleValidate
                        (format|
                         presence|
                         numericality|
+                        inclusion|
                         length)_of)
                      /x || super
     end
