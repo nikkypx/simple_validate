@@ -12,7 +12,7 @@ module SimpleValidate
 
     def valid?(instance)
       raise ArgumentError if inclusion.empty? || !options.fetch(:in).is_a?(Array)
-      inclusion.include?(instance.send(attribute))
+      inclusion.include?("#{instance.send(attribute)}")
     end
   end
 end

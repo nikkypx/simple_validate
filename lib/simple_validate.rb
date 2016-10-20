@@ -3,7 +3,8 @@
    format_of
    numericality_of
    length_of
-   inclusion_of).each do |validation|
+   inclusion_of
+   exclusion_of).each do |validation|
     require "simple_validate/validates_#{validation}"
    end
 require 'simple_validate/errors'
@@ -42,6 +43,7 @@ module SimpleValidate
                         presence|
                         numericality|
                         inclusion|
+                        exclusion|
                         length)_of)
                      /x || super
     end
