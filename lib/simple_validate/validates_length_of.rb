@@ -7,7 +7,7 @@ module SimpleValidate
     VALID_LENGTH_OPTIONS = %i(maximum minimum in is)
 
     def initialize(attribute, options)
-      super(attribute, options.delete(:message), options.delete(:if) || Proc.new { true })
+      super(attribute, options.delete(:message), options.delete(:if) || proc { true })
       self.options = options
     end
 

@@ -1,7 +1,7 @@
-require 'spec_helper'
+require "spec_helper"
 
 RSpec.describe SimpleValidate do
-  describe '::validates_exclusion_of' do
+  describe "::validates_exclusion_of" do
     before do
       @klass = Class.new
       @klass.class_eval do
@@ -11,37 +11,37 @@ RSpec.describe SimpleValidate do
       end
     end
 
-    it '#valid? returns false' do
+    it "#valid? returns false" do
       instance = @klass.new
       expect(instance.valid?).to be(true)
     end
 
-    it '#invalid? returns true' do
+    it "#invalid? returns true" do
       expect(@klass.new.invalid?).to be(false)
     end
 
-    it 'recognizes a value in the set' do
+    it "recognizes a value in the set" do
       instance = @klass.new
       instance.name = :Jack
       expect(instance.valid?).to be(false)
     end
 
-    it 'does not distinguish between symbols and keys' do
+    it "does not distinguish between symbols and keys" do
       instance = @klass.new
-      instance.name = 'Mary'
+      instance.name = "Mary"
       expect(instance.valid?).to be(false)
     end
 
-    it 'it will contain errors' do
+    it "it will contain errors" do
       instance = @klass.new
-      instance.name = 'Mary'
+      instance.name = "Mary"
       instance.valid?
-      expect(instance.errors.on(:name)).to eq(['breaks inclusion/exclusion rules'])
+      expect(instance.errors.on(:name)).to eq(["breaks inclusion/exclusion rules"])
     end
   end
 
-  describe 'errors' do
-    it 'raises an ArgumentError if the with option is not supplied' do
+  describe "errors" do
+    it "raises an ArgumentError if the with option is not supplied" do
       @klass = Class.new
       @klass.class_eval do
         include SimpleValidate
@@ -52,12 +52,12 @@ RSpec.describe SimpleValidate do
       expect { instance.valid? }.to raise_error(ArgumentError)
     end
 
-    it 'raises an ArgumentError if the with option is not supplied an Array' do
+    it "raises an ArgumentError if the with option is not supplied an Array" do
       @klass = Class.new
       @klass.class_eval do
         include SimpleValidate
         attr_accessor :name
-        validates_exclusion_of :name, in: 'not an array'
+        validates_exclusion_of :name, in: "not an array"
       end
       instance = @klass.new
       expect { instance.valid? }.to raise_error(ArgumentError)
