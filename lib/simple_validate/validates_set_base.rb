@@ -1,4 +1,4 @@
-require "set"
+require 'set'
 
 module SimpleValidate
   class ValidatesSetBase < ValidatesBase
@@ -7,7 +7,8 @@ module SimpleValidate
     def initialize(attribute, options)
       self.options = options
       self.set = Set.new(Array(options[:in]).map(&:to_s))
-      super(attribute, options[:message] || "breaks inclusion/exclusion rules", options[:if] || proc { true })
+      super(attribute, options[:message] ||
+        'breaks inclusion/exclusion rules', options[:if] || proc { true })
     end
   end
 end

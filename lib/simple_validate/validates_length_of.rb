@@ -4,10 +4,11 @@ module SimpleValidate
     attr_reader :attribute
     attr_accessor :options
 
-    VALID_LENGTH_OPTIONS = %i(maximum minimum in is)
+    VALID_LENGTH_OPTIONS = %i[maximum minimum in is].freeze
 
     def initialize(attribute, options)
-      super(attribute, options.delete(:message), options.delete(:if) || proc { true })
+      super(attribute, options.delete(:message), options.delete(:if) ||
+        proc { true })
       self.options = options
     end
 
@@ -46,8 +47,14 @@ module SimpleValidate
     end
 
     def valid?(instance)
-      raise ArgumentError, "Only one length argument can be provided" if options.keys.size > 1
-      raise InvalidLengthOption, "Invalid length option given #{options.keys}" unless VALID_LENGTH_OPTIONS.include?(options.keys.first)
+      if options.keys.size > 1
+        raise ArgumentError, 'Only one length argument can be provided'
+      end
+
+      unless VALID_LENGTH_OPTIONS.include?(options.keys.first)
+        raise InvalidLengthOption, "Invalid length option given #{options.keys}"
+      end
+
       actual_length = instance.send(attribute).length
       valid_length?(actual_length)
     end

@@ -1,13 +1,14 @@
-%w(base
+%w[base
    presence_of
    format_of
    numericality_of
    length_of
    set_base
    inclusion_of
-   exclusion_of).each do |validation|
-    require "simple_validate/validates_#{validation}"
+   exclusion_of].each do |validation|
+     require "simple_validate/validates_#{validation}"
    end
+
 require 'simple_validate/errors'
 require 'simple_validate/version'
 require 'active_support/all'
@@ -32,21 +33,21 @@ module SimpleValidate
   module ClassMethods
     def method_missing(method, *args, &block)
       if respond_to?(method)
-        add_validations(args, const_get("#{method}".classify))
+        add_validations(args, const_get(method.to_s.classify))
       else
         super
       end
     end
 
     def respond_to_missing?(method, include_private = false)
-      "#{method}" =~ /(validates_
+      method.to_s =~ /(validates_
                        (format|
                         presence|
                         numericality|
                         inclusion|
                         exclusion|
                         length)_of)
-                     /x || super
+      /x || super
     end
 
     def add_validations(args, klass)

@@ -1,7 +1,8 @@
 module SimpleValidate
   class ValidatesPresenceOf < ValidatesBase
     def initialize(attribute, options)
-      super(attribute, options[:message] || "can't be empty", options[:if] || proc { true })
+      super(attribute, options[:message] ||
+        "can't be empty", options[:if] || proc { true })
     end
 
     def valid?(instance)

@@ -1,7 +1,8 @@
 module SimpleValidate
   class ValidatesNumericalityOf < ValidatesBase
     def initialize(attribute, options)
-      super(attribute, options[:message] || 'must be a number', options[:if] || proc { true })
+      super(attribute, options[:message] ||
+        'must be a number', options[:if] || proc { true })
     end
 
     def valid?(instance)

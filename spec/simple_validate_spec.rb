@@ -16,7 +16,9 @@ RSpec.describe SimpleValidate do
     it 'it will contain array of errors' do
       instance = @klass.new
       instance.valid?
-      expect(instance.errors.on(:age)).to eq(["can't be empty", 'must be a number'])
+      expect(instance.errors.on(:age)).to eq(
+        ["can't be empty", 'must be a number']
+      )
     end
   end
 end
