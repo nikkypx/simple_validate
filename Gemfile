@@ -1,5 +1,14 @@
 source 'https://rubygems.org'
 
 gem 'rake'
-# Specify your gem's dependencies in simple_validate.gemspec
+
+group :development do
+  gem 'pry'
+end
+
+group :test do
+  gem 'rspec'
+  gem 'rubocop'
+end
+
 gemspec
