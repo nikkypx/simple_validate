@@ -15,19 +15,22 @@ require 'active_support/all'
 
 module SimpleValidate
   def self.included(klass)
-    klass.extend ClassMethods
+    klass.extend(ClassMethods)
+    klass.include(InstanceMethods)
   end
 
-  def valid?
-    self.class.validate(self)
-  end
+  module InstanceMethods
+    def valid?
+      self.class.validate(self)
+    end
 
-  def invalid?
-    !valid?
-  end
+    def invalid?
+      !valid?
+    end
 
-  def errors
-    @errors ||= Errors.new
+    def errors
+      @errors ||= Errors.new
+    end
   end
 
   module ClassMethods
