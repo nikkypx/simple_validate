@@ -18,6 +18,6 @@ Gem::Specification.new do |spec|
   end
 
   spec.require_paths = ['lib']
-  spec.add_dependency 'activesupport', '~> 5.0'
+  spec.add_dependency 'activesupport'
   spec.add_development_dependency 'bundler'
 end
