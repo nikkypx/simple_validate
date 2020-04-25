@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module SimpleValidate
   class ValidatesPresenceOf < ValidatesBase
     def initialize(attribute, options)

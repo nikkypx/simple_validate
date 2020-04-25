@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module SimpleValidate
   class ValidatesFormatOf < ValidatesBase
     attr_accessor :regex

@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 %w[base
    presence_of
    format_of

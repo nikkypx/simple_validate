@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module SimpleValidate
   class ValidatesBase
     attr_accessor :message, :attribute, :condition

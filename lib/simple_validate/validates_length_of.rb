@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module SimpleValidate
   class ValidatesLengthOf < ValidatesBase
     class InvalidLengthOption < ArgumentError; end
