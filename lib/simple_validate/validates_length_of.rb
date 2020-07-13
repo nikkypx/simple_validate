@@ -49,15 +49,13 @@ module SimpleValidate
     end
 
     def valid?(instance)
-      if options.keys.size > 1
-        raise ArgumentError, 'Only one length argument can be provided'
-      end
+      raise ArgumentError, 'Only one length argument can be provided' if options.keys.size > 1
 
       unless VALID_LENGTH_OPTIONS.include?(options.keys.first)
         raise InvalidLengthOption, "Invalid length option given #{options.keys}"
       end
 
-      actual_length = instance.send(attribute).length
+      actual_length = instance.__send__(attribute).length
       valid_length?(actual_length)
     end
   end

@@ -8,7 +8,7 @@ module SimpleValidate
     end
 
     def valid?(instance)
-      instance.send(attribute).is_a?(Numeric)
+      instance.__send__(attribute).is_a?(Numeric)
     end
   end
 end

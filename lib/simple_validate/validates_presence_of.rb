@@ -8,7 +8,7 @@ module SimpleValidate
     end
 
     def valid?(instance)
-      !instance.send(attribute).nil?
+      !instance.__send__(attribute).nil?
     end
   end
 end
