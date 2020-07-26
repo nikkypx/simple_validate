@@ -16,28 +16,34 @@ require 'simple_validate/version'
 require 'active_support/all'
 
 module SimpleValidate
+  VALIDATORS = %i[
+    exclusion
+    format
+    inclusion
+    length
+    numericality
+    presence
+  ].freeze
+
   def self.included(klass)
-    klass.extend(ClassMethods)
-    klass.include(InstanceMethods)
+    klass.extend ClassMethods
   end
 
-  module InstanceMethods
-    def valid?
-      self.class.validate(self)
-    end
+  def valid?
+    self.class.validate self
+  end
 
-    def invalid?
-      !valid?
-    end
+  def invalid?
+    !valid?
+  end
 
-    def errors
-      @errors ||= Errors.new
-    end
+  def errors
+    @errors ||= Errors.new
   end
 
   module ClassMethods
     def method_missing(method, *args, &block)
-      if respond_to?(method)
+      if respond_to? method
         add_validations(args, const_get(method.to_s.classify))
       else
         super
@@ -45,14 +51,9 @@ module SimpleValidate
     end
 
     def respond_to_missing?(method, include_private = false)
-      method.to_s =~ /(validates_
-                       (format|
-                        presence|
-                        numericality|
-                        inclusion|
-                        exclusion|
-                        length)_of)
-      /x || super
+      VALIDATORS.map do |v|
+        ['validates', v, 'of'].join('_')
+      end.include?(method.to_s) || super
     end
 
     def add_validations(args, klass)
