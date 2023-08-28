@@ -60,4 +60,20 @@ RSpec.describe SimpleValidate do
       expect(card.valid?).to eq(true)
     end
   end
+
+  context "with length" do
+    it do
+      card = Class.new(Struct.new(:type, :number)) do
+        include SimpleValidate
+
+        validates_length_of :type, in: [2]
+      end
+
+      card = card.new
+      card.type = "VIM"
+
+      expect(card.valid?).to eq(false)
+      expect(card.errors.messages[:type]).to include("is not the correct length")
+    end
+  end
 end
