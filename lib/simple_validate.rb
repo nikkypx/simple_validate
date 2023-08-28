@@ -67,6 +67,8 @@ module SimpleValidate
     end
 
     def validate(instance)
+      instance.errors.clear!
+
       validations.each do |validation|
         if validation.condition.call && !validation.valid?(instance)
           instance.errors.add(validation.attribute, validation.message)

@@ -20,6 +20,10 @@ module SimpleValidate
       @messages.fetch(key)
     end
 
+    def clear!
+      @messages = {}
+    end
+
     def empty?
       @messages.empty?
     end
