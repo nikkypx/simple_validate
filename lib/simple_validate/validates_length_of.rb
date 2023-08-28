@@ -53,7 +53,7 @@ module SimpleValidate
         raise InvalidLengthOption, "Invalid length option given #{options.keys}"
       end
 
-      actual_length = instance.send(attribute).length
+      actual_length = instance.send(attribute)&.length
       valid_length?(actual_length)
     end
   end

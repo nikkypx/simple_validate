@@ -76,4 +76,40 @@ RSpec.describe SimpleValidate do
       expect(card.errors.messages[:type]).to include("is not the correct length")
     end
   end
+
+  context "with multiple errors on same attribute" do
+    it "correctly assigns to same key" do
+      card = Class.new(Struct.new(:type, :number)) do
+        include SimpleValidate
+
+        validates_length_of :type, in: [2]
+        validates_inclusion_of :type, in: ["VI"]
+      end
+
+      card = card.new
+      card.type = "VIM"
+
+      expect(card.valid?).to eq(false)
+      expect(card.errors.messages[:type].size).to eq(2)
+    end
+  end
+
+  context "with multiple calls to valid?" do
+    it "does not duplicate errors" do
+      card = Class.new(Struct.new(:type, :number)) do
+        include SimpleValidate
+
+        validates_length_of :type, in: [2]
+      end
+
+      c = card.new
+
+      c.valid?
+      c.valid?
+      c.valid?
+      c.valid?
+
+      expect(c.errors.messages[:type].size).to eq(1)
+    end
+  end
 end
