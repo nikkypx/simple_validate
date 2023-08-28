@@ -18,7 +18,7 @@ class Person
   attr_accessor :name, :age
   
   validates_presence_of :name, :age
-  validates_numericality_of :age
+  validates_type_of :age, as: :integer
 end
 ```
 
@@ -30,7 +30,7 @@ end
 => p.errors
 => #<SimpleValidate::Errors:0x007f94318b4df0
  @messages=
-  {:age=>["can't be empty", "must be a number"],
+  {:age=>["can't be empty", "must be an integer"],
    :name=>["can't be empty"]}>
 ```
 
