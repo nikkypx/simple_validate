@@ -23,12 +23,13 @@ RSpec.describe SimpleValidate do
 
   context "with type" do
     it do
-      person = Class.new(Struct.new(:name, :age, :height)) do
+      person = Class.new(Struct.new(:name, :age, :height, :alive)) do
         include SimpleValidate
 
         validates_type_of :name, as: :string
         validates_type_of :age, as: :integer
         validates_type_of :height, as: :float
+        validates_type_of :alive, as: :boolean
       end
 
       p = person.new
@@ -40,6 +41,7 @@ RSpec.describe SimpleValidate do
       expect(p.errors.messages[:name]).to include("must be a string")
       expect(p.errors.messages[:age]).to include("must be an integer")
       expect(p.errors.messages[:height]).to include("must be a float")
+      expect(p.errors.messages[:alive]).to include("must be a boolean")
     end
   end
 
