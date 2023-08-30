@@ -63,13 +63,21 @@ end
 ```
 
 ### Inclusion and Exclusion
+* `in` can take a `Range` or an `Array`
 
 ```ruby
   validates_inclusion_of :domain, in: [:net, :com]
+  validates_inclusion_of :number, in: 5..10
   validates_exclusion_of :name, in: [:Bojack, :Horseman]
 ```
 
 ### Options
+
+#### Allow nil
+
+```ruby
+    validates_type_of :attribute, as: :string, allow_nil: true
+```
 
 #### Custom error messages
 
