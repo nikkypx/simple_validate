@@ -5,6 +5,7 @@ module SimpleValidate
     SUPPORTED_TYPES = %i[string integer float boolean].freeze
 
     def initialize(attribute, options)
+      @allow_nil = options[:allow_nil]
       @type = options[:as]
 
       raise ArgumentError unless @type && SUPPORTED_TYPES.include?(@type)
@@ -14,11 +15,15 @@ module SimpleValidate
     end
 
     def valid?(instance)
+      val = instance.send(attribute)
+
+      return true if val.nil? && @allow_nil == true
+
       if @type == :boolean
-        [true, false].include? instance.send(attribute)
+        [true, false].include? val
       else
         klass = Utils.classify(@type)
-        instance.send(attribute).is_a?(klass)
+        val.is_a?(klass)
       end
     end
   end
