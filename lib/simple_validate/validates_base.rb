@@ -5,9 +5,9 @@ module SimpleValidate
     attr_accessor :message, :attribute, :condition
 
     def initialize(attribute, message, condition)
-      self.message   = message
-      self.attribute = attribute
-      self.condition = condition
+      @message   = message
+      @attribute = attribute
+      @condition = condition
     end
   end
 end
