@@ -15,12 +15,11 @@ module SimpleValidate
     end
 
     def valid?(instance)
-      val = instance.send(attribute)
+      return true if super
 
-      return true if val.nil? && @allow_nil == true
       raise ArgumentError if regex.nil? || !regex.is_a?(Regexp)
 
-      !!(val =~ regex)
+      !!(@val =~ regex)
     end
   end
 end

@@ -2,6 +2,8 @@
 
 module SimpleValidate
   class ValidatesTypeOf < ValidatesBase
+    using CoreExt::StringRefinements
+
     SUPPORTED_TYPES = %i[string integer float boolean].freeze
 
     def initialize(attribute, options)
@@ -11,19 +13,17 @@ module SimpleValidate
       raise ArgumentError unless @type && SUPPORTED_TYPES.include?(@type)
 
       super(attribute, options[:message] ||
-        "must be #{Utils.article(@type)} #{@type}", options[:if] || proc { true })
+        "must be #{@type.to_s.article} #{@type}", options[:if] || proc { true })
     end
 
     def valid?(instance)
-      val = instance.send(attribute)
-
-      return true if val.nil? && @allow_nil == true
+      return true if super
 
       if @type == :boolean
-        [true, false].include? val
+        [true, false].include? @val
       else
-        klass = Utils.classify(@type)
-        val.is_a?(klass)
+        klass = Object.const_get(@type.to_s.to_camel)
+        @val.is_a?(klass)
       end
     end
   end

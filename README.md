@@ -1,6 +1,6 @@
 # Simple Validate
 
-> PORO validation mixin with no deps
+> PORO validation mixin with no deps - borrowing ideas from [validatable](https://github.com/jrun/validatable)
 
 ## Installation
 

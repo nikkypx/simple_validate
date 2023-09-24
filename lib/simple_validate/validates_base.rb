@@ -9,5 +9,11 @@ module SimpleValidate
       @attribute = attribute
       @condition = condition
     end
+
+    def valid?(instance)
+      @val = instance.send(attribute)
+
+      @val.nil? && @allow_nil == true
+    end
   end
 end

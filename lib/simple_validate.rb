@@ -1,5 +1,9 @@
 # frozen_string_literal: true
 
+require "simple_validate/core_ext/string_refinements"
+require "simple_validate/errors"
+require "simple_validate/version"
+
 %w[base
    presence_of
    format_of
@@ -10,11 +14,9 @@
      require "simple_validate/validates_#{validation}"
    end
 
-require "simple_validate/errors"
-require "simple_validate/version"
-require "simple_validate/utils"
-
 module SimpleValidate
+  using CoreExt::StringRefinements
+
   def self.included(klass)
     klass.extend(ClassMethods)
     klass.include(InstanceMethods)
@@ -37,7 +39,7 @@ module SimpleValidate
   module ClassMethods
     def method_missing(method, *args, &block)
       if respond_to?(method)
-        add_validations(args, const_get(Utils.camelize(method)))
+        add_validations(args, const_get(method.to_s.to_camel))
       else
         super
       end
@@ -55,7 +57,8 @@ module SimpleValidate
     end
 
     def add_validations(args, klass)
-      options = Utils.extract_options! args
+      options = args.last.is_a?(Hash) ? args.pop : {}
+
       args.each do |attr|
         validations << klass.new(attr, options)
       end

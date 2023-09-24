@@ -40,11 +40,9 @@ module SimpleValidate
     end
 
     def valid?(instance)
-      val = instance.send(attribute)
+      return true if super
 
-      return true if val.nil? && @allow_nil == true
-
-      actual_length = val&.length
+      actual_length = @val&.length
       valid_length?(actual_length)
     end
   end
