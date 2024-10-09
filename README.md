@@ -2,11 +2,10 @@
 
 > PORO validation mixin with no deps - borrowing ideas from [validatable](https://github.com/jrun/validatable)
 
-## Installation
+## Features
 
-```ruby
-gem 'simple_validate'
-```
+- Similar API to Rails
+- No other dependencies
 
 ## Usage
 
@@ -93,6 +92,12 @@ end
 
 ```ruby
   validates_presence_of :attribute, if: Proc.new { true }
+```
+
+## Installation
+
+```ruby
+gem 'simple_validate'
 ```
 
 ## License
