@@ -7,6 +7,9 @@ module SimpleValidate
     def initialize(attribute, options)
       @allow_nil = options[:allow_nil]
       @regex = options[:with]
+
+      raise ArgumentError, "must supply a Regexp via the :with option" unless @regex.is_a?(Regexp)
+
       super(
         attribute,
         options[:message] || "is incorrect format",
@@ -16,8 +19,6 @@ module SimpleValidate
 
     def valid?(instance)
       return true if super
-
-      raise ArgumentError if regex.nil? || !regex.is_a?(Regexp)
 
       !!(@val =~ regex)
     end

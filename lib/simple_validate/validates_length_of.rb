@@ -43,6 +43,8 @@ module SimpleValidate
       return true if super
 
       actual_length = @val&.length
+      return false if actual_length.nil?
+
       valid_length?(actual_length)
     end
   end

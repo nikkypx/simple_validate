@@ -119,6 +119,22 @@ RSpec.describe SimpleValidate do
     end
   end
 
+  context "with a nil value and no allow_nil" do
+    it "is invalid instead of raising" do
+      card = Class.new(Struct.new(:type, :number)) do
+        include SimpleValidate
+
+        validates_length_of :type, minimum: 3
+      end
+
+      c = card.new
+
+      expect { c.valid? }.not_to raise_error
+      expect(c.valid?).to eq(false)
+      expect(c.errors.messages[:type]).to include("is too short")
+    end
+  end
+
   context "with multiple calls to valid?" do
     it "does not duplicate errors" do
       card = Class.new(Struct.new(:type, :number)) do
